@@ -22,7 +22,7 @@ namespace Products.Web.Services.IServices
             {
                 ApiType = SD.ApiType.Post,
                 Data = productDto,
-                Url = SD.ProductAPIBase + "/api/Products",
+                Url = SD.ProductAPIBase + "api/Products",
                 AccessToken =""
             });
         }
@@ -32,7 +32,7 @@ namespace Products.Web.Services.IServices
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.Delete,
-                Url = SD.ProductAPIBase + "/api/Products/" + Id,
+                Url = SD.ProductAPIBase + "api/Products/" + Id,
                 AccessToken = ""
             });
         }
@@ -42,7 +42,7 @@ namespace Products.Web.Services.IServices
            return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.Get,
-                Url = SD.ProductAPIBase + "/api/Products",
+                Url = SD.ProductAPIBase + "api/products",
                 AccessToken = ""
             });
         }
@@ -52,7 +52,7 @@ namespace Products.Web.Services.IServices
            return  await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.Get,
-                Url = SD.ProductAPIBase + "/api/Products/" + Id,
+                Url = SD.ProductAPIBase + "api/Products/" + Id,
                 AccessToken = ""
             });
         }
@@ -63,7 +63,7 @@ namespace Products.Web.Services.IServices
             {
                 ApiType = SD.ApiType.Put,
                 Data = productDto,
-                Url = SD.ProductAPIBase + "/api/Products",
+                Url = SD.ProductAPIBase + "api/Products",
                 AccessToken = ""
             });
         }
