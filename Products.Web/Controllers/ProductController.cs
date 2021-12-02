@@ -31,5 +31,26 @@ namespace Products.Web.Controllers
             }
             return View(list);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductDto productDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _productService.CreateProductAsync<ResponseDto>(productDto);
+
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(productDto);
+        }
     }
 }

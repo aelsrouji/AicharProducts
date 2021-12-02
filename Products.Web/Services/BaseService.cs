@@ -34,7 +34,7 @@ namespace Products.Web.Services
                 client.DefaultRequestHeaders.Clear();
                 if (apiRequest.Data != null)
                 {
-                    httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8);
+                    httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8,"application/json");
                 }
 
                 HttpResponseMessage httpResponseMessage = null;
