@@ -67,5 +67,16 @@ namespace Products.Web.Services.IServices
                 AccessToken = ""
             });
         }
+
+        public async Task<bool> DeleteProduct(int Id)
+        {
+            return await this.SendAsync<bool>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.Delete,
+                Url = SD.ProductAPIBase + "api/products/" + Id,
+                AccessToken = ""
+            });
+
+        }
     }
 }

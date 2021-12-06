@@ -12,6 +12,7 @@ namespace Products.Web.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private ResponseDto _response;
 
         public ProductController(IProductService productService)
         {
@@ -52,5 +53,67 @@ namespace Products.Web.Controllers
             }
             return View(productDto);
         }
+
+        public async Task<IActionResult> Edit(int productId)
+        {
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            if (response != null && response.IsSuccess)
+            {
+                ProductDto productDto = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+                return View(productDto);
+            }
+            return NotFound();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ProductDto productDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _productService.UpdateProductAsync<ResponseDto>(productDto);
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(productDto);
+        }
+
+        public async Task<IActionResult> Delete(int productId)
+        {
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            if (response != null && response.IsSuccess)
+            {
+                ProductDto productDto = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+                return View(productDto);
+            }
+            return NotFound();
+        }
+
+
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public async Task<object> Delete(int id)
+        //{
+        //    try
+        //    {
+        //        bool isSuccess = await _productService.DeleteProduct(id);
+        //        _response.Result = isSuccess;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.IsSuccess = false;
+        //        _response.ErrorMessages = new List<string> { ex.ToString() };
+
+        //        throw;
+        //    }
+        //    return Response;
+        //}
+
+
     }
+
+
 }
