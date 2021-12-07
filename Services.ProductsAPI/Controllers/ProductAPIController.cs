@@ -92,6 +92,7 @@ namespace Services.ProductsAPI.Controllers
         }
 
         [HttpDelete]
+        [Route("{productId}")]
         public async Task<object> Delete(int productId)
         {
             try

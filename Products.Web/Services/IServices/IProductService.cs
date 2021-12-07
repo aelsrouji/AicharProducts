@@ -13,6 +13,5 @@ namespace Products.Web.Services.IServices
         Task<T> CreateProductAsync<T>(ProductDto productDto);
         Task<T> UpdateProductAsync<T>(ProductDto productDto);
         Task<T> DeleteProductAsync<T>(int Id);
-       // Task<bool> DeleteProduct(int productId);
     }
 }

@@ -93,24 +93,27 @@ namespace Products.Web.Controllers
         }
 
 
-        //[HttpDelete]
-        //[Route("{id}")]
-        //public async Task<object> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        bool isSuccess = await _productService.DeleteProduct(id);
-        //        _response.Result = isSuccess;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _response.IsSuccess = false;
-        //        _response.ErrorMessages = new List<string> { ex.ToString() };
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(ProductDto productDto)
+        {
+            try
+            {               
+                var response = await _productService.DeleteProductAsync<ResponseDto>(productDto.ProductId);
+                if (response.IsSuccess)
+                {
+                   return RedirectToAction(nameof(Index));
+                }
+                return View(productDto);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
 
-        //        throw;
-        //    }
-        //    return Response;
-        //}
+                throw;
+            }
+        }
 
 
     }

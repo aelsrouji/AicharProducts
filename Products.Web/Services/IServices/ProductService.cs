@@ -1,4 +1,5 @@
-﻿using Products.Web.Models;
+﻿using Microsoft.AspNetCore.Components;
+using Products.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Products.Web.Services.IServices
             });
         }
 
+        
         public async Task<T> DeleteProductAsync<T>(int Id)
         {
             return await this.SendAsync<T>(new ApiRequest()
