@@ -34,6 +34,18 @@ namespace Products.Web.Controllers
             return View(list);
         }
 
+        public async Task<IActionResult> Details(int productId)
+        {
+            ProductDto product = new();
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            if (response != null && response.IsSuccess)
+            {
+                product = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+            }
+
+            return View(product);
+        }
+
         public IActionResult Privacy()
         {
             return View();

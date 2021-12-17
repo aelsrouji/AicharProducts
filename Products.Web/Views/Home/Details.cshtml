@@ -1,0 +1,35 @@
+﻿@model ProductDto
+<form>
+    @*<input asp-for="ProductId" hidden />*@
+    <div class="container border p-3">
+        <h1 class="text-info">Product Details</h1>
+        <div class="col-2">
+            @Model.Name
+            <label asp-for="Name" class="control-label pt-2" style="font-size:20px;"></label>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                @Model.CategoryName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                @Model.Description
+            </div>
+        </div>
+        <div class="row">
+            @Model.ImageUrl
+        </div>
+        <div>
+            <div class="col-2">
+                @Model.Price
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="Index" class="btn btn-primary form-control">Back</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="AddToCart" class="btn btn-info form-control" />
+            </div>
+        </div>
+    </div>
+</form>
