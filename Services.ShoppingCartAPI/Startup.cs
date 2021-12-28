@@ -1,12 +1,15 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Services.ShoppingCartAPI.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +30,16 @@ namespace Services.ShoppingCartAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //services.AddHttpClient<IPr>
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddScoped<IProductRepositoty, ProductRepository>();
+            
+            services.AddControllers();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -48,6 +61,7 @@ namespace Services.ShoppingCartAPI
 
             app.UseRouting();
 
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -60,6 +60,7 @@ namespace Services.ProductsAPI
 
             app.UseRouting();
 
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
