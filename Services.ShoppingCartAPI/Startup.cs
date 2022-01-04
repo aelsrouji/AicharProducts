@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Services.ShoppingCartAPI.DBContext;
+using Services.ShoppingCartAPI.Repository;
 using System;
 
 namespace Services.ShoppingCartAPI
@@ -31,7 +32,7 @@ namespace Services.ShoppingCartAPI
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.AddScoped<IProductRepositoty, ProductRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
             
             services.AddControllers();
             services.AddControllers();
