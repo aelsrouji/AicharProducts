@@ -1,6 +1,6 @@
 ﻿@model ProductDto
-<form>
-    @*<input asp-for="ProductId" hidden />*@
+<form asp-action="Details">
+    <input asp-for="ProductId" hidden />
     <div class="container border p-3">
         <h1 class="text-info">Product Details</h1>
         <div class="row">
@@ -28,11 +28,17 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-2">
+                <input asp-for="Count" class="form-control" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-2 offset-2">
                 <a asp-action="Index" class="btn btn-primary form-control">Back</a>
             </div>
             <div class="col-2">
-                <input type="submit" value="AddToCart" class="btn btn-info form-control" />
+                <input type="submit" value="Add To Cart" class="btn btn-info form-control" />
             </div>
         </div>
     

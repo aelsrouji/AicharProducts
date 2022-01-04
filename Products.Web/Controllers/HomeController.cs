@@ -78,8 +78,8 @@ namespace Products.Web.Controllers
             cartDetailsDtos.Add(cartDetails);
             cartDto.CartDetails = cartDetailsDtos;
 
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var addToCartResponse = await _cartService.AddToCartAsync<ResponseDto>(cartDto, accessToken);
+            // todo: var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var addToCartResponse = await _cartService.AddToCartAsync<ResponseDto>(cartDto);
             if (addToCartResponse != null && addToCartResponse.IsSuccess)
             {
                 return RedirectToAction(nameof(Index));
