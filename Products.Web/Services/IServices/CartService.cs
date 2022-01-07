@@ -28,12 +28,13 @@ namespace Products.Web.Services.IServices
             });
         }
 
-        public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
+        public async Task<T> GetCartByUserIdAsync<T>(string userId=null, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.Get,
-                Url = SD.ProductAPIBase + "api/cart/GetCart/" + userId,
+                //todo: update 1 to userId when identity server is implemented
+                Url = SD.ShoppingCartAPIBase + "api/cart/GetCart/1" ,//+ userId,
                 AccessToken = ""
             });
         }
