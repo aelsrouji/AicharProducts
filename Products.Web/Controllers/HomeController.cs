@@ -100,7 +100,7 @@ namespace Products.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Login()
         {
             return RedirectToAction(nameof(Index));

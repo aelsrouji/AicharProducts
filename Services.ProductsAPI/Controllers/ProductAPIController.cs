@@ -21,7 +21,7 @@ namespace Services.ProductsAPI.Controllers
             this._response = new ResponseDto(); 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -40,7 +40,7 @@ namespace Services.ProductsAPI.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("{id}")]
         public async Task<object> Get(int id)
@@ -59,7 +59,7 @@ namespace Services.ProductsAPI.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public async Task<object> Post([FromBody]ProductDto productDto)
         {
@@ -78,7 +78,7 @@ namespace Services.ProductsAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        //[Authorize]
         public async Task<object> Put([FromBody] ProductDto productDto)
         {
             try
@@ -95,7 +95,7 @@ namespace Services.ProductsAPI.Controllers
             return _response;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{productId}")]
         public async Task<object> Delete(int productId)
