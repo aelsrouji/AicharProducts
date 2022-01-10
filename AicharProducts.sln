@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.ShoppingCartAPI", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.IdentityServer", "Services.IdentityServer\Services.IdentityServer.csproj", "{DD30F1B4-124A-452A-B50C-9BB80CC0BF02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.CouponAPI", "Services.CouponAPI\Services.CouponAPI.csproj", "{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DD30F1B4-124A-452A-B50C-9BB80CC0BF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD30F1B4-124A-452A-B50C-9BB80CC0BF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD30F1B4-124A-452A-B50C-9BB80CC0BF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
