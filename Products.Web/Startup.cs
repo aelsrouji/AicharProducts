@@ -33,6 +33,26 @@ namespace Products.Web
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartService, CartService>();
             services.AddControllersWithViews();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            }).AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(20))
+            .AddOpenIdConnect("oidc",options =>
+            {
+                options.Authority = Configuration["ServiceUrls.IdentityAPI"];
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.ClientId = "aichar";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.TokenValidationParameters.NameClaimType = "name";
+                options.TokenValidationParameters.RoleClaimType= "role";
+                options.Scope.Add("aichar");
+                options.SaveTokens = true;
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,8 +72,8 @@ namespace Products.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {
