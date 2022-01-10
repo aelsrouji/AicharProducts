@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.IdentityServer.DbContexts;
+using Services.IdentityServer.Initializer;
 using Services.IdentityServer.Models;
 using System;
 using System.Collections.Generic;
@@ -43,13 +44,15 @@ namespace Services.IdentityServer
             .AddInMemoryClients(SD.Clients)
             .AddAspNetIdentity<ApplicationUser>();
 
+            services.AddScoped<IDbInitializer, DbInitializer>();
+
             builder.AddDeveloperSigningCredential();
 
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -68,6 +71,8 @@ namespace Services.IdentityServer
 
             app.UseIdentityServer();
             app.UseAuthorization();
+
+            dbInitializer.Initialize();
 
             app.UseEndpoints(endpoints =>
             {
