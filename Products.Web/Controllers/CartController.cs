@@ -52,7 +52,7 @@ namespace Products.Web.Controllers
             //todo: after adding authentication - identity server 
             //var userId = User.Claims.Where(_ => _.Type == "sub")?.FirstOrDefault()?.Value;
             //var accessToken = await HttpContext.GetTokenAsync("access_token");
-            //var response = _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
+            //var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
             var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, null);
 
             if (response != null && response.IsSuccess)
