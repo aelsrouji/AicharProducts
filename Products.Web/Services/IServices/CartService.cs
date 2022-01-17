@@ -28,6 +28,18 @@ namespace Products.Web.Services.IServices
             });
         }
 
+        public async Task<T> ApplyCoupon<T>(CartDto cartDto, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.Post,
+                Data = cartDto,
+                Url = SD.ShoppingCartAPIBase + "api/cart/ApplyCoupon",
+                AccessToken = ""
+            });
+
+        }
+
         public async Task<T> GetCartByUserIdAsync<T>(string userId=null, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
@@ -37,6 +49,18 @@ namespace Products.Web.Services.IServices
                 Url = SD.ShoppingCartAPIBase + "api/cart/GetCart/1" ,//+ userId,
                 AccessToken = ""
             });
+        }
+
+        public async Task<T> RemoveCoupon<T>(string userId, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.Post,
+                Data = userId,
+                Url = SD.ShoppingCartAPIBase + "api/cart/RemoveCoupon",
+                AccessToken = ""
+            });
+
         }
 
         public async Task<T> RemoveFromCartAsync<T>(int cartId, string token = null)
