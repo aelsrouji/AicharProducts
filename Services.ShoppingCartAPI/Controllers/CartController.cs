@@ -87,5 +87,37 @@ namespace Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        [HttpPost("ApplyCoupon")]
+        public async Task<object> ApplyCoupon([FromBody] CartDto cartDto)
+        {
+            try
+            {
+                bool isSuccess = await _cartReposiroty.ApplyCoupon(cartDto.Cartheader.UserId, cartDto.Cartheader.CouponCode);
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost("RemoveCoupon")]
+        public async Task<object> RemoveCoupon([FromBody] int userId)
+        {
+            try
+            {
+                bool isSuccess = await _cartReposiroty.RemoveCoupon(userId);
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
     }
 }
