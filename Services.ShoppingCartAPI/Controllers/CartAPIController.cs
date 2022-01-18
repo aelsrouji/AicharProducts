@@ -10,12 +10,12 @@ namespace Services.ShoppingCartAPI.Controllers
 {
     [ApiController]
     [Route("api/cart")]
-    public class CartController : Controller
+    public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartReposiroty;
         protected ResponseDto _response;
 
-        public CartController(ICartRepository cartRepository)
+        public CartAPIController(ICartRepository cartRepository)
         {
             _cartReposiroty = cartRepository;
             this._response = new ResponseDto();
@@ -104,7 +104,7 @@ namespace Services.ShoppingCartAPI.Controllers
         }
 
         [HttpPost("RemoveCoupon")]
-        public async Task<object> RemoveCoupon([FromBody] int userId)
+        public async Task<object> RemoveCoupon([FromBody] string userId)
         {
             try
             {

@@ -11,12 +11,12 @@ namespace Services.CouponAPI.Controllers
     [ApiController]
     [Route("api/coupon")]
 
-    public class CouponController : Controller
+    public class CouponAPIController : Controller
     {
         private readonly ICouponRepository _couponReposiroty;
         protected ResponseDto _response;
 
-        public CouponController(ICouponRepository couponRepository)
+        public CouponAPIController(ICouponRepository couponRepository)
         {
             _couponReposiroty = couponRepository;
             this._response = new ResponseDto();
