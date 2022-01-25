@@ -81,6 +81,13 @@ namespace Products.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await LoadCartDtoBasedOnLoggedInUser());
+
+        }
+
         private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
         {
            //todo: after adding authentication - identity server 
