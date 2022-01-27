@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products.Web", "Products.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.ProductsAPI", "Services.ProductsAPI\Services.ProductsAPI.csproj", "{60027DCF-8F5F-4BB2-8F76-CA482FF2D825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.ShoppingCartAPI", "Services.ShoppingCartAPI\Services.ShoppingCartAPI.csproj", "{7CEF3FD8-6011-419E-96C9-1CE8E0235CE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.ShoppingCartAPI", "Services.ShoppingCartAPI\Services.ShoppingCartAPI.csproj", "{7CEF3FD8-6011-419E-96C9-1CE8E0235CE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.IdentityServer", "Services.IdentityServer\Services.IdentityServer.csproj", "{DD30F1B4-124A-452A-B50C-9BB80CC0BF02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.IdentityServer", "Services.IdentityServer\Services.IdentityServer.csproj", "{DD30F1B4-124A-452A-B50C-9BB80CC0BF02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.CouponAPI", "Services.CouponAPI\Services.CouponAPI.csproj", "{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.CouponAPI", "Services.CouponAPI\Services.CouponAPI.csproj", "{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AicharProducts.ServiceBus", "AicharProducts.ServiceBus\AicharProducts.ServiceBus.csproj", "{B006E207-7260-4AB0-B516-025C8084DF97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{422D100B-BF6D-4381-BBCC-9CCC81F5BDDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B006E207-7260-4AB0-B516-025C8084DF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B006E207-7260-4AB0-B516-025C8084DF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B006E207-7260-4AB0-B516-025C8084DF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B006E207-7260-4AB0-B516-025C8084DF97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

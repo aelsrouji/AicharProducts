@@ -1,3 +1,4 @@
+using AicharProducts.ServiceBus;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +34,8 @@ namespace Services.ShoppingCartAPI
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICartRepository, CartRepository>();
-            
+            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+
             services.AddControllers();
             services.AddControllers();
             services.AddSwaggerGen(c =>

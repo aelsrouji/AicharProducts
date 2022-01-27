@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AicharProducts.ServiceBus;
+using Microsoft.AspNetCore.Mvc;
 using Services.ShoppingCartAPI.Messages;
 using Services.ShoppingCartAPI.Models.Dto;
 using Services.ShoppingCartAPI.Repository;
@@ -14,11 +15,13 @@ namespace Services.ShoppingCartAPI.Controllers
     public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartReposiroty;
+        private readonly IMessageBus _messageBus;
         protected ResponseDto _response;
 
-        public CartAPIController(ICartRepository cartRepository)
+        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus)
         {
             _cartReposiroty = cartRepository;
+            _messageBus = messageBus;
             this._response = new ResponseDto();
         }
 
@@ -131,8 +134,8 @@ namespace Services.ShoppingCartAPI.Controllers
                     return BadRequest();
                 }
                 checkoutHeaderDto.CartDetails = cartDto.CartDetails;
-                // logic to add message to process order
 
+                await _messageBus.PublishMessage(checkoutHeaderDto, "checkoutmessagetopic"); // this is the topic name from Azure service bus
             }
             catch (Exception ex)
             {
