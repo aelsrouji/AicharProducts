@@ -40,7 +40,18 @@ namespace Products.Web.Services.IServices
 
         }
 
-        public async Task<T> GetCartByUserIdAsync<T>(string userId=null, string token = null)
+        public async Task<T> Checkout<T>(CartHeaderDto cartHeaderDto, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.Post,
+                Data = cartHeaderDto,
+                Url = SD.ShoppingCartAPIBase + "api/cart/Checkout",
+                AccessToken = ""
+            });
+        }
+
+            public async Task<T> GetCartByUserIdAsync<T>(string userId=null, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
