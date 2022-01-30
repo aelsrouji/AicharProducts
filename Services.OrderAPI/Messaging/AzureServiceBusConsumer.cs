@@ -1,4 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Services.OrderAPI.Messages;
 using Services.OrderAPI.Models;
@@ -14,10 +15,21 @@ namespace Services.OrderAPI.Messaging
     public class AzureServiceBusConsumer
     {
         private readonly OrderRepository _orderRepository;
+        private readonly string serviceBusConnectionString;
+        private readonly string subscriptionName;
+        private readonly string checkoutMessageTopic;
 
-        public AzureServiceBusConsumer(OrderRepository orderRepository)
+        private readonly IConfiguration _configuration;
+
+        public AzureServiceBusConsumer(OrderRepository orderRepository, IConfiguration configuration)
         {
             _orderRepository = orderRepository;
+            _configuration = configuration;
+
+            serviceBusConnectionString = configuration.GetValue<string>("ServiceBusConnectionString");
+            checkoutMessageTopic = configuration.GetValue<string>("CheckoutMessageTopic");
+            subscriptionName = configuration.GetValue<string>("SubscriptionName");
+
         }
 
         private async Task OnCheckOutMessageReceived(ProcessMessageEventArgs args)
