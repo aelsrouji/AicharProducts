@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Services.OrderAPI.DBContexts;
+using Services.OrderAPI.Repository;
 using System;
 
 namespace Services.OrderAPI
@@ -34,7 +35,12 @@ namespace Services.OrderAPI
             //IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             //services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.AddScoped<ICouponRepository, CouponRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+            var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton(new OrderRepository(dbContextOptionsBuilder.Options));
+
             services.AddControllers();
 
             services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>

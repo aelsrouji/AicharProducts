@@ -1,4 +1,6 @@
-﻿using Services.OrderAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Services.OrderAPI.DBContexts;
+using Services.OrderAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +10,33 @@ namespace Services.OrderAPI.Repository
 {
     public class OrderRepository : IOrderRepository
     {
-        public Task<bool> AddOrder(OrderHeader orderHeader)
+        private readonly DbContextOptions<ApplicationDbContext> _dbContext;
+
+        public OrderRepository(DbContextOptions<ApplicationDbContext> dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public async Task<bool> AddOrder(OrderHeader orderHeader)
+        {
+            await using var _db = new ApplicationDbContext(_dbContext);
+            _db.OrderHeaders.Add(orderHeader);
+            await _db.SaveChangesAsync();
+
+            return true;
+
         }
 
-        public Task UpdateOrderPaymentStatus(int orderHeaderId, bool paid)
+        public async Task UpdateOrderPaymentStatus(int orderHeaderId, bool paid)
         {
-            throw new NotImplementedException();
+            await using var _db = new ApplicationDbContext(_dbContext);
+
+            var orderHeaderFromDb = await _db.OrderHeaders.FirstOrDefaultAsync(_ => _.OrderHeaderId == orderHeaderId);
+            if (orderHeaderFromDb != null)
+            {
+                orderHeaderFromDb.PaymentStatus = paid;
+                await _db.SaveChangesAsync();
+            }
+
         }
     }
 }
