@@ -38,7 +38,7 @@ namespace Services.OrderAPI
             services.AddScoped<IOrderRepository, OrderRepository>();
 
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             services.AddSingleton(new OrderRepository(dbContextOptionsBuilder.Options));
 
             services.AddControllers();
