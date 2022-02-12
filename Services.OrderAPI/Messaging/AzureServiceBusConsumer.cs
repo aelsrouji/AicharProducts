@@ -16,8 +16,10 @@ namespace Services.OrderAPI.Messaging
     {
         private readonly OrderRepository _orderRepository;
         private readonly string serviceBusConnectionString;
-        private readonly string subscriptionName;
+        private readonly string subscriptionCheckOut;
         private readonly string checkoutMessageTopic;
+        private ServiceBusProcessor checkOutProcessor;
+
 
         private readonly IConfiguration _configuration;
 
@@ -28,8 +30,33 @@ namespace Services.OrderAPI.Messaging
 
             serviceBusConnectionString = configuration.GetValue<string>("ServiceBusConnectionString");
             checkoutMessageTopic = configuration.GetValue<string>("CheckoutMessageTopic");
-            subscriptionName = configuration.GetValue<string>("SubscriptionName");
+            subscriptionCheckOut = configuration.GetValue<string>("SubscriptionCheckOut");
 
+            var client = new ServiceBusClient(serviceBusConnectionString);
+            checkOutProcessor = client.CreateProcessor(checkoutMessageTopic,subscriptionCheckOut);
+
+        }
+
+        public async Task Start()
+        {
+            checkOutProcessor.ProcessMessageAsync += OnCheckOutMessageReceived;
+            checkOutProcessor.ProcessErrorAsync += ErrorHandler;
+
+            await checkOutProcessor.StartProcessingAsync();
+        }
+        
+        public async Task Stop()
+        {
+     
+            await checkOutProcessor.StopProcessingAsync();
+            await checkOutProcessor.DisposeAsync();
+
+        }
+
+        Task ErrorHandler(ProcessErrorEventArgs arg)
+        {
+            Console.WriteLine(arg.Exception.ToString());
+            return Task.CompletedTask;
         }
 
         private async Task OnCheckOutMessageReceived(ProcessMessageEventArgs args)
