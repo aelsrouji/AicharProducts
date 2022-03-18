@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Services.OrderAPI.DBContexts;
+using Services.OrderAPI.Extensions;
+using Services.OrderAPI.Messaging;
 using Services.OrderAPI.Repository;
 using System;
 
@@ -40,6 +42,7 @@ namespace Services.OrderAPI
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             services.AddSingleton(new OrderRepository(dbContextOptionsBuilder.Options));
+            services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 
             services.AddControllers();
 
@@ -111,6 +114,8 @@ namespace Services.OrderAPI
             {
                 endpoints.MapControllers();
             });
+
+            app.UseAzureServiceBusConsumer();
         }
     }
 }
