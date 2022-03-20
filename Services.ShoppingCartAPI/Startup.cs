@@ -34,10 +34,13 @@ namespace Services.ShoppingCartAPI
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICartRepository, CartRepository>();
-            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
 
+            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
             services.AddControllers();
-            services.AddControllers();
+            services.AddHttpClient<ICouponRepository, CouponRepository>(_ => _.BaseAddress = new Uri(Configuration["ServiceUrls:CouponAPI"]));
+
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Services.ShoppingCartAPI", Version = "v1" });
